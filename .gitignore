@@ -1,0 +1,17 @@
+# --- Basura de sistema ---
+__pycache__/
+.venv/
+.env
+*.pyc
+
+# --- Protegemos tu lógica ---
+strategy.py
+setup.py
+
+# --- Permitimos que Antonio tenga la "gasolina" (datos) ---
+!data/*.csv
+
+# --- NO subimos los resultados (que él los genere) ---
+results/
+trades/
+trades_individual/
