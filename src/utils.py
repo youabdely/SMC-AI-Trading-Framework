@@ -16,10 +16,11 @@ def clean_price(val):
         return float(clean) / 1000000 
     return val
 
-def load_data(file_path):  # <--- Asegúrate de que se llame así
+def load_data(file_path):  
     """Carga el CSV, limpia precios y establece el índice temporal."""
+    # Añadimos "volume" al final de names para absorber el último valor (;0) del ASCII
     df = pd.read_csv(file_path, sep=';', header=None, 
-                     names=["timestamp", "open", "high", "low", "close"])
+                     names=["timestamp", "open", "high", "low", "close", "volume"])
     
     for col in ["open", "high", "low", "close"]:
         df[col] = df[col].apply(clean_price)

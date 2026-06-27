@@ -1,17 +1,33 @@
-# --- Basura de sistema ---
+# ====================================================================
+# CONFIGURACIÓN DE GITIGNORE - TFG YOUSSEF ABDERRAHMANI
+# ====================================================================
+
+# --- Caché y archivos temporales de Python ---
 __pycache__/
-.venv/
-.env
 *.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+src/__pycache__/
 
-# --- Protegemos tu lógica ---
-strategy.py
-setup.py
+# --- Residuos de compilación local (Cython / C) ---
+build/
+src/build/
+*.c
+!src/strategy.c
 
-# --- Permitimos que Antonio tenga la "gasolina" (datos) ---
-!data/*.csv
-
-# --- NO subimos los resultados (que él los genere) ---
-results/
-trades/
+# --- DATOS HISTÓRICOS Y ARREGLOS MASIVOS (Ocultar ventaja) ---
+*.csv
+HISTDATA*
+data/
 trades_individual/
+
+# --- PROPIEDAD INTELECTUAL (Pesos de la IA y Escaladores) ---
+*.keras
+*.pkl
+*.h5
+src/*.keras
+src/*.pkl
+
+# --- Logs y Resultados de ejecuciones locales ---
+results/

@@ -3,18 +3,37 @@ import pandas as pd
 import time
 from datetime import datetime
 import pytz
-import strategy  # Asegúrate de que strategy.py esté en la misma carpeta
+import os
+import strategy  
 
 # --- CONFIGURACIÓN ---
 SIMBOLO = "XAUUSD"
 TIMEFRAME = mt5.TIMEFRAME_M5
 
 def conectar_mt5():
-    if not mt5.initialize():
-        print("❌ Error al conectar con MetaTrader 5")
-        return False
-    print(f"✅ Conectado a MT5 - Símbolo: {SIMBOLO}")
-    return True
+    # 1. Intentamos la inicialización estándar (por si ya está abierto)
+    if mt5.initialize():
+        print(f"✅ Conectado a MT5 - Símbolo: {SIMBOLO} (Gráfico M5)")
+        return True
+        
+    # 2. Si falla, probamos las rutas de instalación más comunes en Windows
+    rutas_probables = [
+        "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+        "C:\\Program Files (x86)\\MetaTrader 5\\terminal64.exe",
+        # Esta ruta busca en la carpeta global de accesos directos de Windows
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\MetaTrader 5\\MetaTrader 5.lnk",
+    ]
+    
+    for ruta in rutas_probables:
+        if os.path.exists(ruta):
+            if mt5.initialize(path=ruta):
+                print(f"✅ Conectado a MT5 forzando ruta: {ruta}")
+                return True
+                
+    # 3. Si llega aquí, es que no se ha podido conectar de ninguna forma
+    print("❌ Error crítico: No se encuentra MetaTrader 5 abierto ni instalado en las rutas estándar.")
+    print("👉 CONSEJO: Abre la aplicación MetaTrader 5 a mano en tu escritorio ANTES de lanzar el script.")
+    return False
 
 def obtener_datos(n_velas=200):
     rates = mt5.copy_rates_from_pos(SIMBOLO, TIMEFRAME, 0, n_velas)
@@ -23,6 +42,36 @@ def obtener_datos(n_velas=200):
     df = pd.DataFrame(rates)
     # Convertimos a float64 para que coincida con lo que espera numpy en tu estrategia
     return df
+def abrir_operacion(tipo_senal, precio_entrada, sl, tp):
+    """Envía una orden de mercado real a MetaTrader 5 con SL y TP automatizados"""
+    # Configurar si es una compra o una venta institucional
+    tipo_orden = mt5.ORDER_TYPE_BUY if tipo_senal == "LONG" else mt5.ORDER_TYPE_SELL
+    
+    # Intentamos rascar el precio de ejecución actual según el tipo de orden
+    precio_actual = mt5.symbol_info_tick(SIMBOLO).ask if tipo_senal == "LONG" else mt5.symbol_info_tick(SIMBOLO).bid
+    if precio_actual is None:
+        precio_actual = precio_entrada # Backup por si falla el tick instantáneo
+
+    request = {
+        "action": mt5.TRADE_ACTION_DEAL,
+        "symbol": SIMBOLO,
+        "volume": 0.1,  # Ajusta el lotaje según la gestión de riesgo de tu TFG
+        "type": tipo_orden,
+        "price": precio_actual,
+        "sl": float(sl),
+        "tp": float(tp),
+        "deviation": 20,
+        "magic": 202605,  # Identificador único de tu bot
+        "comment": "Bot SMC-IA TFG",
+        "type_time": mt5.ORDER_TIME_GTC,
+        "type_filling": mt5.ORDER_FILL_IOC,
+    }
+    
+    resultado = mt5.order_send(request)
+    if resultado.retcode != mt5.TRADE_RETCODE_DONE:
+        print(f"❌ Error al enviar orden a MT5: {resultado.comment} (Código: {resultado.retcode})")
+    else:
+        print(f"💰 ¡ORDEN EJECUTADA CON ÉXITO! Ticket: {resultado.order}")
 
 def ejecutar_puente():
     if not conectar_mt5(): return
