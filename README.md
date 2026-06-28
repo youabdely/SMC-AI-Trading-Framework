@@ -8,74 +8,72 @@ Este proyecto de **Trabajo de Fin de Grado (TFG)** presenta el diseño, implemen
 El objetivo principal es la creación de un sistema analítico *end-to-end* capaz de procesar volúmenes masivos de datos históricos y flujos en tiempo real. El framework elimina el factor emocional y los sesgos cognitivos en entornos competitivos mediante una ejecución estrictamente determinista y validada estadísticamente sobre un extenso histórico continuo.
 
 ---
-
 ## 🚀 Guía de Inicio Rápido (Despliegue y Ejecución)
 
-Siga estos pasos para compilar los módulos nativos y ejecutar el sistema en su entorno local:
+Siga los siguientes pasos para compilar los módulos nativos y ejecutar el sistema en su entorno local.
 
 ### 1. Instalación de dependencias
-Se requiere **Python 3.10** o superior. Instale el entorno de librerías necesarias ejecutando:
+
+Se requiere **Python 3.10** o superior. Instale las librerías necesarias ejecutando:
+
 ```bash
-pip install pandas numpy tensorflow scikit-learn mplfinance matplotlib pytz
-2. Compilación de Módulos Nativos (Optimización en C)
-Para mitigar la sobrecarga (overhead) de Python y competir en latencia en la microestructura del mercado, el motor de reglas heurísticas crítico se encuentra optimizado en C puro. Compile el módulo nativo mediante Cython ejecutando:
+pip install pandas numpy tensorflow scikit-learn mplfinance matplotlib pytz cython MetaTrader5
+```
 
-Bash
+---
+
+### 2. Compilación de Módulos Nativos (Optimización en C)
+
+Para mitigar la sobrecarga (*overhead*) de Python y competir en latencia dentro de la microestructura del mercado, el núcleo de reglas heurísticas se encuentra implementado en **C** y compilado mediante **Cython**.
+
+Compile el módulo nativo ejecutando:
+
+```bash
 python src/setup.py build_ext --inplace
-3. Ejecución del Core y Backtesting Estadístico
-Para procesar el motor de reglas y analizar la operativa detallada con el pipeline de validación inteligente:
+```
 
-Bash
+La compilación generará automáticamente el módulo compartido (`.so` en Linux/macOS o `.pyd` en Windows), que será utilizado por el sistema durante la ejecución.
+
+---
+
+### 3. Ejecución del Core y Backtesting Estadístico
+
+Una vez instaladas las dependencias y compilados los módulos nativos, ejecute el framework en modo de análisis histórico mediante:
+
+```bash
 python src/main.py
-Nota: El sistema modular permite conmutar entre el motor determinista estándar (backtest_engine.py) y el motor optimizado supervisado por el Perceptrón Multicapa (backtest_engine_AI.py).
+```
 
-⚙️ Arquitectura Técnica
-1. Ingesta y ETL (Extract, Transform, Load)
-Alta Resolución Temporal: Procesamiento de series temporales en resolución de 1 minuto (1m) sobre un histórico continuo (2018-2025) con costes reales de mercado (spread dinámico, comisiones y slippage).
+El sistema iniciará automáticamente el pipeline completo de:
 
-Pipeline Multitemporal: Sistema de resampling dinámico acoplado para el análisis de estructuras macro (generación de velas de 5m a partir de datos crudos de 1m).
+* Carga del histórico.
+* Preprocesamiento y ETL.
+* Construcción de temporalidades.
+* Ejecución del motor SMC.
+* Filtrado mediante IA (MLP).
+* Backtesting estadístico.
+* Generación de métricas y visualizaciones.
 
-Segmentación Operativa: Motor de filtrado especializado en ventanas de alta volatilidad y liquidez institucional (Killzones de la sesión de Nueva York).
+> **Nota:** El framework permite alternar entre el motor determinista (`backtest_engine.py`) y el motor supervisado mediante inteligencia artificial (`backtest_engine_AI.py`) sin modificar el resto del pipeline.
 
-2. Motor de Reglas Heurísticas (SMC Core)
-Digitalización de patrones geométricos de microestructura mediante algoritmos deterministas:
+---
 
-Identificación de Zonas: Detección automatizada de Order Blocks (OB) y Fair Value Gaps (FVG).
+### 4. Ejecución en Tiempo Real (Live Trading Bridge)
 
-Cálculo de Niveles: Determinación en tiempo real de zonas de Equilibrium (Premium/Discount) y barridos de liquidez.
+El framework incorpora un puente bidireccional con **MetaTrader 5 (MT5)** para el procesamiento continuo de datos de mercado en tiempo real.
 
-Compilación Nativa: El núcleo geométrico (strategy.c) se compila anticipadamente para garantizar el máximo rendimiento del ciclo de reloj del procesador.
+Ejecute el puente mediante:
 
-3. Capa de Inteligencia Artificial (Filtro Supervisor)
-Gatekeeper Probabilístico: Integración de un clasificador denso basado en un Perceptrón Multicapa (MLP) y modelos comparativos regularizados frente a la degradación de redes LSTM.
+```bash
+python src/puente_tfg.py
+```
 
-Mitigación de Overfitting: El modelo evalúa el contexto vectorial del mercado estrictamente en el momento del setup geométrico, bloqueando las operaciones de baja esperanza matemática y optimizando drásticamente la curva de equidad final out-of-sample.
+Durante la ejecución:
 
-4. Subsistema de Enlace en Tiempo Real (Live Bridge)
-Integración MetaTrader 5 (MT5): Conector bidireccional mediante el API nativo para la captura de flujos masivos de ticks y ejecución de órdenes.
+* Se establece la conexión con el terminal **MetaTrader 5**.
+* Se reciben automáticamente las nuevas velas de **1 minuto (M1)**.
+* Cada minuto, los datos son transferidos al motor de estrategia.
+* El motor procesa las reglas SMC y, opcionalmente, el filtro supervisor basado en IA.
+* En función del resultado, el sistema genera la señal operativa correspondiente para su posterior ejecución o supervisión.
 
-Sincronización Dinámica: Control de husos horarios (pytz) alineado con el servidor de Nueva York para la ejecución síncrona de las ventanas operativas.
-
-🛠️ Roadmap de Implementación (Hitos Completados)
-[x] Fase 1: Prototipo funcional de ingesta de datos y motor de simulación.
-
-[x] Fase 2: Modelado, abstracción matemática y compilación del motor de reglas SMC (FVG, OB, Liquidez).
-
-[x] Fase 3: Diseño, entrenamiento robusto y validación cruzada temporal del supervisor MLP (IA).
-
-[x] Fase 4: Integración completa con el Live Bridge bidireccional para MetaTrader 5.
-
-[x] Fase 5: Validación ciega continua (Out-of-Sample 2018-2025) y consolidación de métricas financieras (Ratio de Sharpe, Drawdown, Profit Factor).
-
-💻 Stack Tecnológico
-Lenguaje Core: Python 3.10+ (Optimizado con Cython y C nativo).
-
-Ciencia de Datos: Pandas, NumPy.
-
-Marcos de Deep Learning: TensorFlow / Keras, Scikit-learn.
-
-Visualización Avanzada: Mplfinance, Matplotlib.
-
-Autor: Youssef Abderrahmani
-
-Tutoría: Departamento de Lenguajes y Sistemas Informáticos (LSI) — Escuela Técnica Superior de Ingeniería Informática (ETSII), Universidad de Sevilla.
+Este diseño permite reutilizar el mismo motor analítico empleado durante el backtesting sobre un flujo de datos en tiempo real, garantizando la coherencia entre la validación histórica y la operativa *live*.
