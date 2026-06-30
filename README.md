@@ -1,97 +1,268 @@
-# Hybrid Algorithmic System: SMC Logic & Machine Learning Validation
+<div align="center">
 
-Este proyecto de **Trabajo de Fin de Grado (TFG)** presenta el diseño y desarrollo de un framework de trading algorítmico de alta precisión para el par **XAU/USD (Oro)**. El sistema combina la metodología de análisis institucional **SMC (Smart Money Concepts)** con modelos de **Aprendizaje Supervisado** para la optimización de la toma de decisiones.
+# 🤖 SMC AI Trading Framework
+
+### Algorithmic Trading Framework powered by Smart Money Concepts and Artificial Intelligence
+
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)]()
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)]()
+[![MetaTrader5](https://img.shields.io/badge/MetaTrader5-API-green.svg)]()
+[![Cython](https://img.shields.io/badge/Cython-Optimized-yellow.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)]()
+
+*A modular algorithmic trading framework combining deterministic Smart Money Concepts (SMC) with Machine Learning to improve trade selection through probabilistic filtering.*
+
+</div>
 
 ---
- 
-## 🎯 Visión General
-El objetivo principal es la creación de un sistema *end-to-end* capaz de procesar volúmenes masivos de datos históricos y en tiempo real, eliminando el factor emocional y los sesgos cognitivos mediante una ejecución estrictamente determinista y validada estadísticamente.
+
+## 📖 Overview
+
+SMC AI Trading Framework is a research-oriented algorithmic trading platform developed as a Computer Engineering Final Degree Project.
+
+Instead of attempting to predict market prices directly, the framework transforms **Smart Money Concepts (SMC)** into deterministic mathematical rules. These trading opportunities are then evaluated by a Machine Learning model that estimates the probability of success before execution.
+
+The project combines:
+
+- Deterministic rule-based trading
+- Feature engineering
+- Machine Learning classification
+- Historical backtesting
+- Performance evaluation
+- Live MetaTrader 5 integration
 
 ---
 
-## 🚀 Guía de Inicio Rápido (Para el Tutor)
+# ✨ Features
 
-Siga estos pasos para replicar los resultados del sistema en su entorno local:
+- 📈 Smart Money Concepts implementation
+- 🧠 AI-powered trade filtering
+- ⚡ High-performance strategy engine
+- 🔬 Multiple ML models comparison
+- 📊 Historical backtesting engine
+- 📉 Equity curve generation
+- 📋 Professional performance reports
+- 🛡 Risk management system
+- ⚙ MetaTrader 5 integration
+- 🚀 Cython optimized strategy module
 
-### 1. Instalación de dependencias
-Se requiere **Python 3.10** o superior. Instale las librerías necesarias ejecutando:
+---
+
+# 🏗 System Architecture
+
+```
+                Historical / Live Data
+                         │
+                         ▼
+                Data Preprocessing
+                         │
+                         ▼
+            Smart Money Rule Engine
+                         │
+              Trading Opportunity
+                         │
+                         ▼
+          Feature Engineering Pipeline
+                         │
+                         ▼
+              Machine Learning Model
+                         │
+            Probability Estimation
+                         │
+        Probability > Decision Threshold?
+                 │               │
+               YES               NO
+                 │               │
+                 ▼               ▼
+          Execute Trade      Ignore Signal
+```
+
+---
+
+# 🧠 Machine Learning
+
+Several supervised learning algorithms were evaluated during the research:
+
+| Model | Purpose |
+|--------|----------|
+| Multi-Layer Perceptron (MLP) | Final production model |
+| Random Forest | Baseline comparison |
+| LSTM | Sequential modelling |
+
+The final implementation uses a **Multi-Layer Perceptron (MLP)** after comparative evaluation, achieving the best balance between inference speed, robustness and generalization.
+
+---
+
+# 📊 Trading Logic
+
+The deterministic engine follows the Smart Money Concepts methodology:
+
+1. Killzone validation
+2. Liquidity pool detection
+3. Liquidity sweep identification
+4. Break of Structure (BOS)
+5. Feature extraction
+6. AI probability estimation
+7. Risk validation
+8. Trade execution
+
+---
+
+# 📂 Project Structure
+
+```
+SMC-AI-Trading-Framework/
+│
+├── strategy.pyx            # Cython strategy engine
+├── backtest.py             # Historical simulator
+├── live_trading.py         # Live trading
+├── train_model.py          # AI training
+├── feature_engineering.py
+├── models/
+│
+├── datasets/
+│
+├── reports/
+│
+├── figures/
+│
+├── utils/
+│
+└── README.md
+```
+
+---
+
+# ⚙ Installation
+
+Clone the repository
+
 ```bash
-pip install pandas mplfinance matplotlib numpy
-2. Ejecución del Backtest Individual (Visualización de Trades)
-Para generar reportes gráficos y analizar la operativa detallada de un año específico:
+git clone https://github.com/youabdely/SMC-AI-Trading-Framework.git
 
-Bash
-python src/main.py
-Los resultados se almacenarán automáticamente en la carpeta /trades_individual.
+cd SMC-AI-Trading-Framework
+```
 
-3. Ejecución del Backtest Masivo (Estadísticas 2015-2025)
-Para procesar el histórico completo de 11 años y generar la tabla de métricas global en consola:
+Install dependencies
 
-Bash
-python src/ultimate_backtest.py
-⚙️ Arquitectura Técnica
-1. Ingesta y ETL (Extract, Transform, Load)
-Alta Resolución: Procesamiento de series temporales en resolución de 1 minuto (1m) con un histórico extenso (2015-2025).
+```bash
+pip install -r requirements.txt
+```
 
-Pipeline de Datos: Sistema de resampling dinámico para análisis multitemporal (generación de velas de 5m a partir de 1m).
+Compile the optimized strategy module
 
-Segmentación Operativa: Motor de filtrado horario especializado en la ventana de volatilidad de la sesión de Nueva York (09:30 - 10:30).
+```bash
+cythonize -i -3 strategy.pyx
+```
 
-2. Motor de Reglas Heurísticas (SMC Core)
-Digitalización de patrones de microestructura de mercado mediante algoritmos de reconocimiento geométrico:
+---
 
-Identificación de Zonas: Detección de Order Blocks (OB) y Fair Value Gaps (FVG).
+# 🚀 Usage
 
-Cálculo de Niveles: Determinación automática de zonas de Equilibrium y niveles de liquidez institucional.
+### Train the model
 
-Lógica de Setup: Validación de condiciones de entrada basadas en el cumplimiento estricto de la estrategia programada.
+```bash
+python train_model.py
+```
 
-Optimización: El núcleo de la estrategia ha sido compilado en .pyd (Cython) para garantizar alto rendimiento y proteger la propiedad intelectual.
+### Run historical backtest
 
-3. Capa de Inteligencia Artificial (En Desarrollo)
-Clasificador de Calidad: Modelo de Machine Learning (Clasificación) encargado de actuar como filtro supervisor.
+```bash
+python backtest.py
+```
 
-Objetivo: Analizar variables del entorno en el momento del setup para predecir la probabilidad de éxito, permitiendo descartar operaciones de baja esperanza matemática.
+### Start live trading
 
-4. Subsistema de Análisis y Backtesting
-Generación automática de indicadores clave de rendimiento:
+```bash
+python live_trading.py
+```
 
-Métricas Financieras: Profit Factor, Drawdown máximo, Esperanza Matemática y Ratio de Sharpe.
+---
 
-Reportes Visuales:
+# 📊 Research Methodology
 
-/trades_ganadores: Documentación visual de ejecuciones exitosas con niveles de entrada y salida.
+The project follows a complete Machine Learning workflow:
 
-/trades_perdedores: Análisis de fallos para el refinamiento del modelo (Debug).
+- Historical data acquisition
+- Feature Engineering
+- Dataset generation
+- Model training
+- Hyperparameter optimization
+- In-Sample validation
+- Out-of-Sample validation
+- Comparative evaluation
+- Live deployment
 
+---
 
-## 🌉 Subsistema de Conexión en Tiempo Real (Live Bridge)
-Se ha implementado una capa de enlace directo con el mercado para la transición del backtest a la operativa real.
+# 📈 Risk Management
 
-- **Integración con MetaTrader 5 (MT5):** Conector bidireccional que permite la captura de flujos de datos OHLCV en tiempo real para el par XAU/USD.
-- **Reloj de Precisión de Sesiones:** Sincronización automática con la zona horaria de Nueva York (`pytz`) para la activación de Killzones operativas, independientemente de la ubicación del servidor.
-- **Buffer de Datos Dinámico:** Sistema de alimentación que transforma los datos crudos del broker en DataFrames compatibles con el motor de reglas de alta velocidad.
+The framework incorporates a fully automated risk management module:
 
-🛠 Roadmap de Implementación
-[x] Fase 1: Prototipo funcional de ingesta de datos y motor de backtesting.
+- Fixed percentage risk per trade
+- Dynamic position sizing
+- Automatic Stop Loss calculation
+- Automatic Take Profit calculation
+- Risk/Reward validation
+- Maximum one trade per session
 
-[ ] Fase 2: Desarrollo y compilación del motor de reglas SMC (FVG, OB, Liquidez).
+---
 
-[ ] Fase 3: Entrenamiento y despliegue del modelo de clasificación (IA).
+# ⚡ Performance Optimization
 
-[x] Fase 4: Integración con API de Broker para operativa independiente.
+Critical components are compiled using **Cython**, providing:
 
-[ ] Fase 5: Stress-testing estadístico sobre el histórico completo.
+- Lower latency
+- Faster execution
+- Source code protection
+- Production-ready deployment
 
-💻 Stack Tecnológico
-Lenguaje: Python 3.10+ (Core optimizado con Cython).
+---
 
-Procesamiento de Datos: Pandas, NumPy.
+# 🛠 Technologies
 
-Inteligencia Artificial: Scikit-learn / TensorFlow.
+- Python
+- NumPy
+- Pandas
+- TensorFlow
+- Scikit-Learn
+- MetaTrader5 API
+- Matplotlib
+- mplfinance
+- Cython
 
-Visualización: Mplfinance, Matplotlib.
+---
 
-Autor: Youssef Abderrahmani
+# 🎓 Academic Context
 
-Tutoría: Dpto. Lenguajes y Sistemas Informáticos (LSI) - Universidad de Sevilla.
+This project was developed as the Final Degree Project (TFG) for the Computer Engineering degree.
+
+**Title**
+
+> Development and Implementation of an Artificial Intelligence Optimized Algorithmic Trading Platform
+
+---
+
+# ⚠ Disclaimer
+
+This repository is intended exclusively for educational and research purposes.
+
+Trading financial markets involves significant risk. Past performance does not guarantee future results.
+
+---
+
+# 👨‍💻 Author
+
+**Youssef Abderrahmani**
+
+Computer Engineering
+
+Artificial Intelligence • Algorithmic Trading • Machine Learning
+
+---
+
+<div align="center">
+
+⭐ If you find this project interesting, consider giving it a star.
+
+</div>
