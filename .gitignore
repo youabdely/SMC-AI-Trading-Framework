@@ -23,11 +23,11 @@ data/
 trades_individual/
 
 # --- PROPIEDAD INTELECTUAL (Pesos de la IA y Escaladores) ---
-*.keras
-*.pkl
-*.h5
-src/*.keras
-src/*.pkl
+#*.keras
+#*.pkl
+#*.h5
+#src/*.keras
+#src/*.pkl
 
 # --- Logs y Resultados de ejecuciones locales ---
 results/
