@@ -31,3 +31,6 @@ src/*.pkl
 
 # --- Logs y Resultados de ejecuciones locales ---
 results/
+
+# --- Documentación privada ---
+README.md

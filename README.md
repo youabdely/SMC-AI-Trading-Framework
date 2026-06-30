@@ -1,79 +1,97 @@
 # Hybrid Algorithmic System: SMC Logic & Machine Learning Validation
 
-Este proyecto de **Trabajo de Fin de Grado (TFG)** presenta el diseño, implementación y validación de un framework autónomo de trading algorítmico de alta precisión para el par **XAU/USD (Oro)**. El sistema digitaliza y automatiza la metodología de análisis técnico avanzado **SMC (Smart Money Concepts)**, optimizando la toma de decisiones mediante un supervisor probabilístico basado en **Aprendizaje Profundo (Deep Learning)**.
+Este proyecto de **Trabajo de Fin de Grado (TFG)** presenta el diseño y desarrollo de un framework de trading algorítmico de alta precisión para el par **XAU/USD (Oro)**. El sistema combina la metodología de análisis institucional **SMC (Smart Money Concepts)** con modelos de **Aprendizaje Supervisado** para la optimización de la toma de decisiones.
 
 ---
-
+ 
 ## 🎯 Visión General
-El objetivo principal es la creación de un sistema analítico *end-to-end* capaz de procesar volúmenes masivos de datos históricos y flujos en tiempo real. El framework elimina el factor emocional y los sesgos cognitivos en entornos competitivos mediante una ejecución estrictamente determinista y validada estadísticamente sobre un extenso histórico continuo.
+El objetivo principal es la creación de un sistema *end-to-end* capaz de procesar volúmenes masivos de datos históricos y en tiempo real, eliminando el factor emocional y los sesgos cognitivos mediante una ejecución estrictamente determinista y validada estadísticamente.
 
 ---
-## 🚀 Guía de Inicio Rápido (Despliegue y Ejecución)
 
-Siga los siguientes pasos para compilar los módulos nativos y ejecutar el sistema en su entorno local.
+## 🚀 Guía de Inicio Rápido (Para el Tutor)
+
+Siga estos pasos para replicar los resultados del sistema en su entorno local:
 
 ### 1. Instalación de dependencias
-
 Se requiere **Python 3.10** o superior. Instale las librerías necesarias ejecutando:
-
 ```bash
-pip install pandas numpy tensorflow scikit-learn mplfinance matplotlib pytz cython MetaTrader5
-```
+pip install pandas mplfinance matplotlib numpy
+2. Ejecución del Backtest Individual (Visualización de Trades)
+Para generar reportes gráficos y analizar la operativa detallada de un año específico:
 
----
-
-### 2. Compilación de Módulos Nativos (Optimización en C)
-
-Para mitigar la sobrecarga (*overhead*) de Python y competir en latencia dentro de la microestructura del mercado, el núcleo de reglas heurísticas se encuentra implementado en **C** y compilado mediante **Cython**.
-
-Compile el módulo nativo ejecutando:
-
-```bash
-python src/setup.py build_ext --inplace
-```
-
-La compilación generará automáticamente el módulo compartido (`.so` en Linux/macOS o `.pyd` en Windows), que será utilizado por el sistema durante la ejecución.
-
----
-
-### 3. Ejecución del Core y Backtesting Estadístico
-
-Una vez instaladas las dependencias y compilados los módulos nativos, ejecute el framework en modo de análisis histórico mediante:
-
-```bash
+Bash
 python src/main.py
-```
+Los resultados se almacenarán automáticamente en la carpeta /trades_individual.
 
-El sistema iniciará automáticamente el pipeline completo de:
+3. Ejecución del Backtest Masivo (Estadísticas 2015-2025)
+Para procesar el histórico completo de 11 años y generar la tabla de métricas global en consola:
 
-* Carga del histórico.
-* Preprocesamiento y ETL.
-* Construcción de temporalidades.
-* Ejecución del motor SMC.
-* Filtrado mediante IA (MLP).
-* Backtesting estadístico.
-* Generación de métricas y visualizaciones.
+Bash
+python src/ultimate_backtest.py
+⚙️ Arquitectura Técnica
+1. Ingesta y ETL (Extract, Transform, Load)
+Alta Resolución: Procesamiento de series temporales en resolución de 1 minuto (1m) con un histórico extenso (2015-2025).
 
-> **Nota:** El framework permite alternar entre el motor determinista (`backtest_engine.py`) y el motor supervisado mediante inteligencia artificial (`backtest_engine_AI.py`) sin modificar el resto del pipeline.
+Pipeline de Datos: Sistema de resampling dinámico para análisis multitemporal (generación de velas de 5m a partir de 1m).
 
----
+Segmentación Operativa: Motor de filtrado horario especializado en la ventana de volatilidad de la sesión de Nueva York (09:30 - 10:30).
 
-### 4. Ejecución en Tiempo Real (Live Trading Bridge)
+2. Motor de Reglas Heurísticas (SMC Core)
+Digitalización de patrones de microestructura de mercado mediante algoritmos de reconocimiento geométrico:
 
-El framework incorpora un puente bidireccional con **MetaTrader 5 (MT5)** para el procesamiento continuo de datos de mercado en tiempo real.
+Identificación de Zonas: Detección de Order Blocks (OB) y Fair Value Gaps (FVG).
 
-Ejecute el puente mediante:
+Cálculo de Niveles: Determinación automática de zonas de Equilibrium y niveles de liquidez institucional.
 
-```bash
-python src/puente_tfg.py
-```
+Lógica de Setup: Validación de condiciones de entrada basadas en el cumplimiento estricto de la estrategia programada.
 
-Durante la ejecución:
+Optimización: El núcleo de la estrategia ha sido compilado en .pyd (Cython) para garantizar alto rendimiento y proteger la propiedad intelectual.
 
-* Se establece la conexión con el terminal **MetaTrader 5**.
-* Se reciben automáticamente las nuevas velas de **1 minuto (M1)**.
-* Cada minuto, los datos son transferidos al motor de estrategia.
-* El motor procesa las reglas SMC y, opcionalmente, el filtro supervisor basado en IA.
-* En función del resultado, el sistema genera la señal operativa correspondiente para su posterior ejecución o supervisión.
+3. Capa de Inteligencia Artificial (En Desarrollo)
+Clasificador de Calidad: Modelo de Machine Learning (Clasificación) encargado de actuar como filtro supervisor.
 
-Este diseño permite reutilizar el mismo motor analítico empleado durante el backtesting sobre un flujo de datos en tiempo real, garantizando la coherencia entre la validación histórica y la operativa *live*.
+Objetivo: Analizar variables del entorno en el momento del setup para predecir la probabilidad de éxito, permitiendo descartar operaciones de baja esperanza matemática.
+
+4. Subsistema de Análisis y Backtesting
+Generación automática de indicadores clave de rendimiento:
+
+Métricas Financieras: Profit Factor, Drawdown máximo, Esperanza Matemática y Ratio de Sharpe.
+
+Reportes Visuales:
+
+/trades_ganadores: Documentación visual de ejecuciones exitosas con niveles de entrada y salida.
+
+/trades_perdedores: Análisis de fallos para el refinamiento del modelo (Debug).
+
+
+## 🌉 Subsistema de Conexión en Tiempo Real (Live Bridge)
+Se ha implementado una capa de enlace directo con el mercado para la transición del backtest a la operativa real.
+
+- **Integración con MetaTrader 5 (MT5):** Conector bidireccional que permite la captura de flujos de datos OHLCV en tiempo real para el par XAU/USD.
+- **Reloj de Precisión de Sesiones:** Sincronización automática con la zona horaria de Nueva York (`pytz`) para la activación de Killzones operativas, independientemente de la ubicación del servidor.
+- **Buffer de Datos Dinámico:** Sistema de alimentación que transforma los datos crudos del broker en DataFrames compatibles con el motor de reglas de alta velocidad.
+
+🛠 Roadmap de Implementación
+[x] Fase 1: Prototipo funcional de ingesta de datos y motor de backtesting.
+
+[ ] Fase 2: Desarrollo y compilación del motor de reglas SMC (FVG, OB, Liquidez).
+
+[ ] Fase 3: Entrenamiento y despliegue del modelo de clasificación (IA).
+
+[x] Fase 4: Integración con API de Broker para operativa independiente.
+
+[ ] Fase 5: Stress-testing estadístico sobre el histórico completo.
+
+💻 Stack Tecnológico
+Lenguaje: Python 3.10+ (Core optimizado con Cython).
+
+Procesamiento de Datos: Pandas, NumPy.
+
+Inteligencia Artificial: Scikit-learn / TensorFlow.
+
+Visualización: Mplfinance, Matplotlib.
+
+Autor: Youssef Abderrahmani
+
+Tutoría: Dpto. Lenguajes y Sistemas Informáticos (LSI) - Universidad de Sevilla.
