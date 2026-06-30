@@ -111,24 +111,25 @@ The deterministic engine follows the Smart Money Concepts methodology:
 # 📂 Project Structure
 
 ```
-SMC-AI-Trading-Framework/
+SMC-AI-TRADING-FRAMEWORK/
 │
-├── strategy.pyx            # Cython strategy engine
-├── backtest.py             # Historical simulator
-├── live_trading.py         # Live trading
-├── train_model.py          # AI training
-├── feature_engineering.py
-├── models/
+├── src/
+│   ├── main.py
+│   ├── backtest_engine.py
+│   ├── backtest_engine_AI.py
+│   ├── entrenar_ia.py
+│   ├── train_comparativa.py
+│   ├── puente_tfg.py
+│   ├── utils.py
+│   ├── strategy.pyd
+│   ├── strategy.c
+│   ├── setup.py
+│   ├── modelos...
+│   └── escalador...
 │
-├── datasets/
-│
-├── reports/
-│
-├── figures/
-│
-├── utils/
-│
-└── README.md
+├── data/
+├── results/
+├── README.md
 ```
 
 ---
@@ -162,19 +163,19 @@ cythonize -i -3 strategy.pyx
 ### Train the model
 
 ```bash
-python train_model.py
+python entrenar_ia.py
 ```
 
 ### Run historical backtest
 
 ```bash
-python backtest.py
+python backtest_engine.py
 ```
 
 ### Start live trading
 
 ```bash
-python live_trading.py
+python puente_tfg.py
 ```
 
 ---
