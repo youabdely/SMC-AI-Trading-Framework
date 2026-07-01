@@ -30,7 +30,7 @@ trades_individual/
 #src/*.pkl
 
 # --- Logs y Resultados de ejecuciones locales ---
-results/
+#results/
 
 # --- Documentación privada ---
 README.md
