@@ -170,12 +170,13 @@ python entrenar_ia.py
 
 ```bash
 python backtest_engine.py
+
 ```
 
 ### Start live trading
 
 ```bash
-python puente_tfg.py
+python puente_MetaTrader5.py
 ```
 
 ---
