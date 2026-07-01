@@ -2,7 +2,7 @@
 
 # 🤖 SMC AI Trading Framework
 
-### Algorithmic Trading Framework powered by Smart Money Concepts and Artificial Intelligence
+### Framework de Trading Algorítmico impulsado por Smart Money Concepts e Inteligencia Artificial
 
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)]()
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)]()
@@ -10,105 +10,106 @@
 [![Cython](https://img.shields.io/badge/Cython-Optimized-yellow.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)]()
 
-*A modular algorithmic trading framework combining deterministic Smart Money Concepts (SMC) with Machine Learning to improve trade selection through probabilistic filtering.*
+*Framework modular de trading algorítmico que combina Smart Money Concepts (SMC) deterministas con Machine Learning para mejorar la selección de operaciones mediante filtrado probabilístico.*
 
 </div>
 
 ---
 
-## 📖 Overview
+## 📖 Resumen
 
-SMC AI Trading Framework is a research-oriented algorithmic trading platform developed as a Computer Engineering Final Degree Project.
+SMC AI Trading Framework es una plataforma de trading algorítmico orientada a la investigación, desarrollada como Trabajo de Fin de Grado de Ingeniería Informática.
 
-Instead of attempting to predict market prices directly, the framework transforms **Smart Money Concepts (SMC)** into deterministic mathematical rules. These trading opportunities are then evaluated by a Machine Learning model that estimates the probability of success before execution.
+En lugar de intentar predecir directamente los precios del mercado, el framework transforma los **Smart Money Concepts (SMC)** en reglas matemáticas deterministas. Estas oportunidades de trading son posteriormente evaluadas por un modelo de Machine Learning que estima la probabilidad de éxito antes de su ejecución.
 
-The project combines:
+El proyecto combina:
 
-- Deterministic rule-based trading
-- Feature engineering
-- Machine Learning classification
-- Historical backtesting
-- Performance evaluation
-- Live MetaTrader 5 integration
-
----
-
-# ✨ Features
-
-- 📈 Smart Money Concepts implementation
-- 🧠 AI-powered trade filtering
-- ⚡ High-performance strategy engine
-- 🔬 Multiple ML models comparison
-- 📊 Historical backtesting engine
-- 📉 Equity curve generation
-- 📋 Professional performance reports
-- 🛡 Risk management system
-- ⚙ MetaTrader 5 integration
-- 🚀 Cython optimized strategy module
+- Trading basado en reglas deterministas
+- Ingeniería de características (feature engineering)
+- Clasificación mediante Machine Learning
+- Backtesting histórico
+- Evaluación de rendimiento
+- Integración en vivo con MetaTrader 5
 
 ---
 
-# 🏗 System Architecture
+# ✨ Características
+
+- 📈 Implementación de Smart Money Concepts
+- 🧠 Filtrado de operaciones con IA
+- ⚡ Motor de estrategia de alto rendimiento
+- 🔬 Comparación de múltiples modelos de ML
+- 📊 Motor de backtesting histórico
+- 📉 Generación de curva de capital (equity curve)
+- 📋 Informes de rendimiento profesionales
+- 🛡 Sistema de gestión de riesgo
+- ⚙ Integración con MetaTrader 5
+- 🚀 Módulo de estrategia optimizado con Cython
+
+---
+
+# 🏗 Arquitectura del Sistema
 
 ```
-                Historical / Live Data
+                Datos Históricos / En Vivo
                          │
                          ▼
-                Data Preprocessing
+                Preprocesamiento de Datos
                          │
                          ▼
-            Smart Money Rule Engine
+            Motor de Reglas Smart Money
                          │
-              Trading Opportunity
-                         │
-                         ▼
-          Feature Engineering Pipeline
+              Oportunidad de Trading
                          │
                          ▼
-              Machine Learning Model
+          Pipeline de Ingeniería de Características
                          │
-            Probability Estimation
+                         ▼
+              Modelo de Machine Learning
                          │
-        Probability > Decision Threshold?
+            Estimación de Probabilidad
+                         │
+        ¿Probabilidad > Umbral de decisión?
                  │               │
-               YES               NO
+               SÍ               NO
                  │               │
                  ▼               ▼
-          Execute Trade      Ignore Signal
+          Ejecutar Operación   Ignorar Señal
 ```
+
 
 ---
 
 # 🧠 Machine Learning
 
-Several supervised learning algorithms were evaluated during the research:
+Durante la investigación se evaluaron varios algoritmos de aprendizaje supervisado:
 
-| Model | Purpose |
+| Modelo | Propósito |
 |--------|----------|
-| Multi-Layer Perceptron (MLP) | Final production model |
-| Random Forest | Baseline comparison |
-| LSTM | Sequential modelling |
+| Multi-Layer Perceptron (MLP) | Modelo final en producción |
+| Random Forest | Modelo base de comparación |
+| LSTM | Modelado secuencial |
 
-The final implementation uses a **Multi-Layer Perceptron (MLP)** after comparative evaluation, achieving the best balance between inference speed, robustness and generalization.
-
----
-
-# 📊 Trading Logic
-
-The deterministic engine follows the Smart Money Concepts methodology:
-
-1. Killzone validation
-2. Liquidity pool detection
-3. Liquidity sweep identification
-4. Break of Structure (BOS)
-5. Feature extraction
-6. AI probability estimation
-7. Risk validation
-8. Trade execution
+La implementación final utiliza un **Multi-Layer Perceptron (MLP)** tras la evaluación comparativa, logrando el mejor equilibrio entre velocidad de inferencia, robustez y generalización.
 
 ---
 
-# 📂 Project Structure
+# 📊 Lógica de Trading
+
+El motor determinista sigue la metodología Smart Money Concepts:
+
+1. Validación de Killzone  
+2. Detección de pools de liquidez  
+3. Identificación de barridos de liquidez  
+4. Break of Structure (BOS)  
+5. Extracción de características  
+6. Estimación de probabilidad con IA  
+7. Validación de riesgo  
+8. Ejecución de la operación  
+
+---
+
+# 📂 Estructura del Proyecto
 
 ```
 SMC-AI-TRADING-FRAMEWORK/
@@ -132,22 +133,23 @@ SMC-AI-TRADING-FRAMEWORK/
 ├── README.md
 ```
 
-# 🚀 Usage
+---
 
-### Train the model
+# 🚀 Uso
+
+### Entrenar el modelo
 
 ```bash
 python entrenar_ia.py
 ```
 
-### Run historical backtest
+### Ejecutar backtest histórico
 
 ```bash
 python backtest_engine.py
-
 ```
 
-### Start live trading
+### Iniciar trading en vivo
 
 ```bash
 python puente_MetaTrader5.py
@@ -155,47 +157,47 @@ python puente_MetaTrader5.py
 
 ---
 
-# 📊 Research Methodology
+# 📊 Metodología de Investigación
 
-The project follows a complete Machine Learning workflow:
+El proyecto sigue un flujo completo de Machine Learning:
 
-- Historical data acquisition
-- Feature Engineering
-- Dataset generation
-- Model training
-- Hyperparameter optimization
-- In-Sample validation
-- Out-of-Sample validation
-- Comparative evaluation
-- Live deployment
-
----
-
-# 📈 Risk Management
-
-The framework incorporates a fully automated risk management module:
-
-- Fixed percentage risk per trade
-- Dynamic position sizing
-- Automatic Stop Loss calculation
-- Automatic Take Profit calculation
-- Risk/Reward validation
-- Maximum one trade per session
+- Adquisición de datos históricos
+- Ingeniería de características
+- Generación del dataset
+- Entrenamiento del modelo
+- Optimización de hiperparámetros
+- Validación In-Sample
+- Validación Out-of-Sample
+- Evaluación comparativa
+- Despliegue en vivo
 
 ---
 
-# ⚡ Performance Optimization
+# 📈 Gestión de Riesgo
 
-Critical components are compiled using **Cython**, providing:
+El framework incorpora un módulo de gestión de riesgo completamente automatizado:
 
-- Lower latency
-- Faster execution
-- Source code protection
-- Production-ready deployment
+- Riesgo fijo por operación en porcentaje
+- Dimensionamiento dinámico de posiciones
+- Cálculo automático de Stop Loss
+- Cálculo automático de Take Profit
+- Validación de Risk/Reward
+- Máximo una operación por sesión
 
 ---
 
-# 🛠 Technologies
+# ⚡ Optimización de Rendimiento
+
+Los componentes críticos están compilados con **Cython**, proporcionando:
+
+- Menor latencia
+- Mayor velocidad de ejecución
+- Protección del código fuente
+- Despliegue listo para producción
+
+---
+
+# 🛠 Tecnologías
 
 - Python
 - NumPy
@@ -209,36 +211,38 @@ Critical components are compiled using **Cython**, providing:
 
 ---
 
-# 🎓 Academic Context
+# 🎓 Contexto Académico
 
-This project was developed as the Final Degree Project (TFG) for the Computer Engineering degree.
+Este proyecto fue desarrollado como Trabajo de Fin de Grado (TFG) de Ingeniería Informática.
 
-**Title**
+**Título**
 
-> Development and Implementation of an Artificial Intelligence Optimized Algorithmic Trading Platform
+> Desarrollo e Implementación de una Plataforma de Trading Algorítmico Optimizada con Inteligencia Artificial
 
 ---
 
 # ⚠ Disclaimer
 
-This repository is intended exclusively for educational and research purposes.
+Este repositorio está destinado exclusivamente a fines educativos y de investigación.
 
-Trading financial markets involves significant risk. Past performance does not guarantee future results.
+Operar en los mercados financieros implica un alto riesgo. El rendimiento pasado no garantiza resultados futuros.
 
 ---
 
-# 👨‍💻 Author
+# 👨‍💻 Autor
 
 **Youssef Abderrahmani**
 
-Computer Engineering
+Ingeniería Informática
 
-Artificial Intelligence • Algorithmic Trading • Machine Learning
+Inteligencia Artificial • Trading Algorítmico • Machine Learning
 
 ---
 
 <div align="center">
 
-⭐ If you find this project interesting, consider giving it a star.
+⭐ Si te resulta interesante este proyecto, considera darle una estrella.
 
 </div>
+```
+```
