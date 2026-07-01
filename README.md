@@ -132,32 +132,6 @@ SMC-AI-TRADING-FRAMEWORK/
 ├── README.md
 ```
 
----
-
-# ⚙ Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/youabdely/SMC-AI-Trading-Framework.git
-
-cd SMC-AI-Trading-Framework
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Compile the optimized strategy module
-
-```bash
-cythonize -i -3 strategy.pyx
-```
-
----
-
 # 🚀 Usage
 
 ### Train the model
